@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Oficinas</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/
+</head>
+
+<body>
+<div class="wrapper-logged">
+    <div th:replace="fragments/header :: header">&nbsp;</div>
+    <section class="container" id="contracts-section">
+        <div class="wrapper-container">
+            <h3 style="margin-bottom: 2vh">Contratos Alquiler</h3>
+
+            <!-- Mensaje de éxito -->
+            <div th:if="${mensaje}">
+                <div class="alert alert-success" role="alert">
+                    <p th:text="${mensaje}"></p>
+                </div>
+            </div>
+            <div class="scrollable-table" style="margin-bottom: 3vh">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha Fin</th>
+                            <th>Fecha Inicio</th>
+                            <th>Cliente</th>
+                            <th>Oficina</th>
+                            <th>Vehículos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="contratoAlquiler : ${contratosAlquiler}">
+                            <td th:text="${contratoAlquiler.id}"></td>
+                            <td th:text="${contratoAlquiler.fechaFin}"></td>
+                            <td th:text="${contratoAlquiler.fechaInicio}"></td>
+                            <td th:text="${contratoAlquiler.cliente.nombre} + ${contratoAlquiler.cliente.apellidos}"></td>
+                            <td th:text="${contratoAlquiler.oficina.ciudad}"></td>
+                            <td>
+                                <ul>
+                                    <li class="vehiculos-col" th:each="vehiculo : ${contratoAlquiler.vehiculos}">
+                                        <p th:text="${vehiculo.marca} +  | ${vehiculo.modelo}"></p>
+                                        <span th:text=" ${vehiculo.matricula}"></span>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <!-- Botón Editar -->
+                                <a th:href="@{/administracion/contratos-alquiler/editar/{id}(id=${contratoAlquiler.id})}">
+                                    <img src="../../images/edit.png" alt="Editar" class="icono" style="width: 35px; height: 35px; margin-right: 5px">
+                                </a>
+                                <!-- Botón Borrar -->
+                                <a th:href="@{/administracion/contratos-alquiler/borrar/{id}(id=${contratoAlquiler.id})}" onclick="return confirm('¿Estás seguro de que quieres borrar esta oficina?')">
+                                    <img src="../../images/delete.png" alt="Eliminar" class="icono" style="width: 35px; height: 35px">
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="text-align: right">
+                <a th:href="@{/administracion/contratos-alquiler/nuevo}" class="btn btn-primary">Añadir Contrato</a>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

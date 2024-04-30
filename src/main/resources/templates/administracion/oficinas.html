@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Oficinas</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+</head>
+
+<body>
+<div class="wrapper-logged">
+    <div th:replace="fragments/header :: header">&nbsp;</div>
+    <section class="container" id="office-section">
+        <div class=" wrapper-container">
+            <h3 style="margin-bottom: 2vh;">Oficinas</h3>
+
+            <!-- Mensaje de éxito -->
+            <div th:if="${mensaje}">
+                <div class="alert alert-success" role="alert">
+                    <p th:text="${mensaje}"></p>
+                </div>
+            </div>
+
+            <div class="scrollable-table" style="margin-bottom: 3vh">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Dirección</th>
+                        <th>Ciudad</th>
+                        <th>Teléfono</th>
+                        <th>Código Postal</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="oficina : ${oficinas}">
+                        <td th:text="${oficina.id}"></td>
+                        <td th:text="${oficina.direccion}"></td>
+                        <td th:text="${oficina.ciudad}"></td>
+                        <td th:text="${oficina.telefono}"></td>
+                        <td th:text="${oficina.codigoPostal}"></td>
+                        <td>
+                            <!-- Botón Editar -->
+                            <a th:href="@{/administracion/oficinas/editar/{id}(id=${oficina.id})}">
+                                <img src="../../images/edit.png" alt="Editar" class="icono" style="width: 35px; height: 35px; margin-right: 5px">
+                            </a>
+                            <!-- Botón Borrar -->
+                            <a th:href="@{/administracion/oficinas/borrar/{id}(id=${oficina.id})}" onclick="return confirm('¿Estás seguro de que quieres borrar esta oficina?')">
+                                <img src="../../images/delete.png" alt="Eliminar" class="icono" style="width: 35px; height: 35px">
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="text-align: right">
+                <a th:href="@{/administracion/oficinas/nuevo}" class="btn btn-primary">Añadir Oficina</a>
+            </div>
+        </div>
+
+</div>
+</body>
+</html>
