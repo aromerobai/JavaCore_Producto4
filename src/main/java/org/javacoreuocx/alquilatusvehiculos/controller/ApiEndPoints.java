@@ -38,6 +38,7 @@ public class ApiEndPoints {
         return  clienteRepository.findByUsername(username);
     }
     @GetMapping("/oficinasCodigoPostal")
-    public Optional<Oficina> getAllOficinas(String codigoPostal) {return oficinaRepository.findByCodigoPostal(codigoPostal);}
-
+    public Optional<Oficina> getAllOficinas(String codigoPostal) {
+        return oficinaRepository.findByCodigoPostal(codigoPostal);
+    }
 }
