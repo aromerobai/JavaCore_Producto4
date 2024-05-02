@@ -55,7 +55,8 @@ public class WebSecurityConfig {
                     "/swagger-ui/**",
                     "/swagger-ui.html",
                     "/v3/api-docs/**",
-                    "/api-docs/**"
+                    "/api-docs/**",
+                    "/api/**"
                 ).permitAll();
                 requests.requestMatchers(
                         "/home"

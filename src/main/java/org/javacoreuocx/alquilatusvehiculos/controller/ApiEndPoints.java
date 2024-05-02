@@ -1,13 +1,15 @@
 package org.javacoreuocx.alquilatusvehiculos.controller;
 
 import org.javacoreuocx.alquilatusvehiculos.model.Cliente;
-import org.javacoreuocx.alquilatusvehiculos.model.Vehiculo;
+import org.javacoreuocx.alquilatusvehiculos.model.Oficina;
 import org.javacoreuocx.alquilatusvehiculos.repository.ClienteRepository;
-import org.javacoreuocx.alquilatusvehiculos.repository.VehiculoRepository;
+import org.javacoreuocx.alquilatusvehiculos.repository.ContratoAlquilerRepository;
+import org.javacoreuocx.alquilatusvehiculos.repository.OficinaRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
@@ -15,17 +17,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ApiEndPoints {
 
     @Autowired
-    private VehiculoRepository vehiculoRepository;
+    private OficinaRepository oficinaRepository;
 
     @Autowired
     private ClienteRepository clienteRepository;
-    @GetMapping("/vehiculos")
-    public List<Vehiculo> getAllVehiculos() {
-        return vehiculoRepository.findAll();
+
+    @Autowired
+    private ContratoAlquilerRepository contratoAlquilerRepository;
+    @GetMapping("/oficinas")
+    public List<Oficina> getAllOficinas() {
+        return oficinaRepository.findAll();
     }
 
     @GetMapping("/clientes")
     public List<Cliente> getAllClientes() {
         return  clienteRepository.findAll();
     }
+
 }
