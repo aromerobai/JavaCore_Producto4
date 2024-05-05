@@ -2,17 +2,22 @@ package org.javacoreuocx.alquilatusvehiculos.config;
 
 import javax.sql.DataSource;
 
+import jakarta.servlet.Filter;
 import org.javacoreuocx.alquilatusvehiculos.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 @Configuration
 @EnableWebSecurity
@@ -40,7 +45,21 @@ public class WebSecurityConfig {
         return authProvider;
     }
 
+    @Value("${internal.api-key}")
+    private String internalApiKey;
     @Bean
+    @Order(1)
+    public SecurityFilterChain filterChainPrivate(HttpSecurity http) throws Exception {
+        http
+                .securityMatcher("/api/internal/**")
+                .addFilterBefore(new InternalApiKeyAuthenticationFilter(internalApiKey), ChannelProcessingFilter.class)
+                .cors(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable);
+        return http.build();
+    }
+
+    @Bean
+    @Order(2)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(requests -> {
@@ -52,18 +71,22 @@ public class WebSecurityConfig {
                     "/css/**",
                     "/js/**",
                     "/login",
-                    "/swagger-ui/**",
-                    "/swagger-ui.html",
-                    "/v3/api-docs/**",
+                    "/api/v1/guest/**",
+                    "/api/v1/auth/**",
                     "/api-docs/**",
-                    "/api/**"
+                    "/v2/api-docs",
+                    "/v3/api-docs",
+                    "/v3/api-docs/**",
+                    "/swagger-resources",
+                    "/swagger-resources/**",
+                    "/configuration/ui",
+                    "/configuration/security",
+                    "/swagger-ui/**",
+                    "/webjars/**",
+                    "/swagger-ui.html"
                 ).permitAll();
-                requests.requestMatchers(
-                        "/home"
-                ).authenticated();
-                requests.requestMatchers(
-            "/administracion/**"
-                ).hasRole("ADMIN");
+                requests.requestMatchers("/home").authenticated();
+                requests.requestMatchers("/administracion/**").hasRole("ADMIN");
                 requests.anyRequest().authenticated();
             });
         http.csrf(csrf -> csrf.disable());
@@ -77,6 +100,7 @@ public class WebSecurityConfig {
             logout.logoutSuccessUrl("/login?logout=true");
             logout.permitAll();
         });
+
         return http.build();
     }
 

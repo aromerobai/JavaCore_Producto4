@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "34cb22c0-8b25-49ec-824e-d9a1b85c6927",
+		"name": "PROD4-JAVACORE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15366904"
+	},
+	"item": [
+		{
+			"name": "prod4-auth-clientes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "",
+						"uuid": "cf286e1f-f6b1-488e-9864-b25e6279bf54",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/internal/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"internal",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "prod4-auth-clientes-nombre",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/internal/clientesNombre?username=user@user.es",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"internal",
+						"clientesNombre"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "user@user.es"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "prod4-auth-oficinas-cp",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/internal/oficinasCodigoPostal?codigoPostal=50001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"internal",
+						"oficinasCodigoPostal"
+					],
+					"query": [
+						{
+							"key": "codigoPostal",
+							"value": "50001"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
