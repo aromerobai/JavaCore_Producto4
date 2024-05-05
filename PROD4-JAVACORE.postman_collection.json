@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "34cb22c0-8b25-49ec-824e-d9a1b85c6927",
+		"_postman_id": "b94b323e-e906-4cda-90a3-f0e5a52da504",
 		"name": "PROD4-JAVACORE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "15366904"
+		"_exporter_id": "34644473"
 	},
 	"item": [
 		{
@@ -24,7 +24,7 @@
 					{
 						"key": "x-api-key",
 						"value": "",
-						"uuid": "cf286e1f-f6b1-488e-9864-b25e6279bf54",
+						"uuid": "8f640629-560e-4dac-b351-8194a7a6fd90",
 						"disabled": true
 					}
 				],
@@ -112,6 +112,54 @@
 						{
 							"key": "codigoPostal",
 							"value": "50001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "prod4-guest-oficinas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/guest/oficinas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"guest",
+						"oficinas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "prod4-guest-oficinasCiudad",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/guest/oficinasCiudad?ciudad=Zaragoza",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"guest",
+						"oficinasCiudad"
+					],
+					"query": [
+						{
+							"key": "ciudad",
+							"value": "Zaragoza"
 						}
 					]
 				}

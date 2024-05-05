@@ -12,7 +12,7 @@ import java.util.Optional;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/guest")
 public class ApiEndPoints {
 
     @Autowired
