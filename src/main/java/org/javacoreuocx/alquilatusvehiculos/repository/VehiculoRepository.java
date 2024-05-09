@@ -2,7 +2,9 @@ package org.javacoreuocx.alquilatusvehiculos.repository;
 
 import org.javacoreuocx.alquilatusvehiculos.model.Vehiculo;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface VehiculoRepository extends JpaRepository<Vehiculo, Integer> {
@@ -13,4 +15,7 @@ public interface VehiculoRepository extends JpaRepository<Vehiculo, Integer> {
     Optional<Vehiculo> findByModelo(String modelo);
 
     Optional<Vehiculo> findByMarcaAndModelo(String marca, String modelo);
+
+    @Query("SELECT DISTINCT v FROM Vehiculo v LEFT JOIN FETCH v.contratoVehiculos")
+    List<Vehiculo> findAllWithContratoAlquilerVehiculos();
 }

@@ -1,5 +1,7 @@
 package org.javacoreuocx.alquilatusvehiculos.controller;
 
+import org.javacoreuocx.alquilatusvehiculos.model.Vehiculo;
+import org.javacoreuocx.alquilatusvehiculos.repository.VehiculoRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,5 +40,4 @@ public class ApiEndpointsInternal {
     public Optional<Oficina> getAllOficinas(String codigoPostal) {
         return oficinaRepository.findByCodigoPostal(codigoPostal);
     }
-
 }
