@@ -16,6 +16,4 @@ public interface VehiculoRepository extends JpaRepository<Vehiculo, Integer> {
 
     Optional<Vehiculo> findByMarcaAndModelo(String marca, String modelo);
 
-    @Query("SELECT DISTINCT v FROM Vehiculo v LEFT JOIN FETCH v.contratoVehiculos")
-    List<Vehiculo> findAllWithContratoAlquilerVehiculos();
 }
