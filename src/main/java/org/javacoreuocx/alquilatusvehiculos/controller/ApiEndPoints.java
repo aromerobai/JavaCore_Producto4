@@ -33,4 +33,7 @@ public class ApiEndPoints {
 
     @GetMapping("/oficinasCiudad")
     public Optional<Oficina> getOficinasId(String ciudad) {return oficinaRepository.findByCiudad(ciudad);}
+
+    @GetMapping("/vehiculos")
+    public List<Vehiculo> getAllVehiculos() {return vehiculoRepository.findAll();}
 }

@@ -1,5 +1,6 @@
 package org.javacoreuocx.alquilatusvehiculos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -18,6 +19,7 @@ public class Vehiculo {
     private String matricula;
 
     @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Set<ContratoAlquilerVehiculo> contratoVehiculos = new HashSet<>();
 
     public Vehiculo() {
